@@ -39,14 +39,6 @@ class UpdateCommand extends Command
         $this->input = $input;
         $this->output = $output;
 
-        $please = new Please($output);
-
-        if ($please->isV2()) {
-            $please->run('update');
-
-            return 0;
-        }
-
         $output->writeln(PHP_EOL.'<comment>NOTE: If you have previously updated using the CP, you may need to update the version in your composer.json before running this update!</comment>'.PHP_EOL);
 
         $command = $this->updateCommand();

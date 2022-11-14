@@ -9,18 +9,6 @@ use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use ZipArchive;
 
-trait InstallsLegacy
-{
-    protected function installV2()
-    {
-        (new LegacyInstaller($this))->install();
-
-        $this->showSuccessMessage();
-
-        return 0;
-    }
-}
-
 class LegacyInstaller
 {
     protected $command;

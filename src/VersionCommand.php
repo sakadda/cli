@@ -31,11 +31,7 @@ class VersionCommand extends Command
     {
         $please = new Please($output);
 
-        if ($please->isV2()) {
-            $please->run('version');
-        } else {
-            $please->run('--version');
-        }
+        $please->run('--version');
 
         return 0;
     }

@@ -10,7 +10,6 @@ class Please
 {
     protected $output;
     protected $cwd;
-    protected $v2;
 
     /**
      * Instantiate Sakadda `please` command wrapper.
@@ -37,16 +36,6 @@ class Please
         $this->cwd = $cwd;
 
         return $this;
-    }
-
-    /**
-     * Check if Sakadda instance is v2.
-     *
-     * @return bool
-     */
-    public function isV2()
-    {
-        return is_dir($this->cwd().'/sakadda') && is_file($this->cwd().'/please');
     }
 
     /**

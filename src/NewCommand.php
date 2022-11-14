@@ -16,8 +16,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class NewCommand extends Command
 {
-    use Concerns\RunsCommands,
-        Concerns\InstallsLegacy;
+    use Concerns\RunsCommands;
 
     const BASE_REPO = 'sakadda/sakadda';
     const OUTPOST_ENDPOINT = 'https://outpost.sakadda.com/v3/starter-kits/';
@@ -35,7 +34,6 @@ class NewCommand extends Command
     public $withConfig;
     public $withoutDependencies;
     public $force;
-    public $v2;
     public $baseInstallSuccessful;
     public $shouldUpdateCliToVersion = false;
 
@@ -56,7 +54,6 @@ class NewCommand extends Command
             ->addOption('local', null, InputOption::VALUE_NONE, 'Optionally install from local repo configured in composer config.json')
             ->addOption('with-config', null, InputOption::VALUE_NONE, 'Optionally copy starter-kit.yaml config for local development')
             ->addOption('without-dependencies', null, InputOption::VALUE_NONE, 'Optionally install starter kit without dependencies')
-            ->addOption('v2', null, InputOption::VALUE_NONE, 'Create a legacy Sakadda v2 application (not recommended)')
             ->addOption('force', 'f', InputOption::VALUE_NONE, 'Force install even if the directory already exists');
     }
 
@@ -78,10 +75,6 @@ class NewCommand extends Command
             ->processArguments()
             ->validateArguments()
             ->showSakaddaTitleArt();
-
-        if ($this->v2) {
-            return $this->installV2();
-        }
 
         $this
             ->askForRepo()
@@ -170,8 +163,6 @@ class NewCommand extends Command
 
         $this->force = $this->input->getOption('force');
 
-        $this->v2 = $this->input->getOption('v2');
-
         return $this;
     }
 
@@ -190,10 +181,6 @@ class NewCommand extends Command
 
         if ($this->force && $this->pathIsCwd()) {
             throw new RuntimeException('Cannot use --force option when using current directory for installation!');
-        }
-
-        if ($this->starterKit && $this->v2) {
-            throw new RuntimeException('Cannot use starter kit with legacy v2 installation!');
         }
 
         if ($this->starterKit && $this->isInvalidStarterKit()) {
@@ -226,12 +213,12 @@ class NewCommand extends Command
      */
     protected function showSakaddaTitleArt()
     {
-        $this->output->write(PHP_EOL.'<fg=gray>.d8888.  .d8b.  db   dD  .d8b.  d8888b. d8888b.  .d8b.  </>
-        <fg=gray>88\'  YP d8\' `8b 88 ,8P\' d8\' `8b 88  `8D 88  `8D d8\' `8b </>
-        <fg=gray>`8bo.   88ooo88 88,8P   88ooo88 88   88 88   88 88ooo88 </>
-        <fg=gray>  `Y8b. 88~~~88 88`8b   88~~~88 88   88 88   88 88~~~88 </>
-        <fg=gray>db   8D 88   88 88 `88. 88   88 88  .8D 88  .8D 88   88 </>
-        <fg=gray>`8888Y\' YP   YP YP   YD YP   YP Y8888D\' Y8888D\' YP   YP </>'.PHP_EOL.PHP_EOL);
+        $this->output->write(PHP_EOL.'    <fg=gray>.d8888.  .d8b.  db   dD  .d8b.  d8888b. d8888b.  .d8b.  </>
+    <fg=gray>88\'  YP d8\' `8b 88 ,8P\' d8\' `8b 88  `8D 88  `8D d8\' `8b </>
+    <fg=gray>`8bo.   88ooo88 88,8P   88ooo88 88   88 88   88 88ooo88 </>
+    <fg=gray>  `Y8b. 88~~~88 88`8b   88~~~88 88   88 88   88 88~~~88 </>
+    <fg=gray>db   8D 88   88 88 `88. 88   88 88  .8D 88  .8D 88   88 </>
+    <fg=gray>`8888Y\' YP   YP YP   YD YP   YP Y8888D\' Y8888D\' YP   YP </>'.PHP_EOL.PHP_EOL);
 
         return $this;
     }
