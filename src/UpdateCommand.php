@@ -13,6 +13,7 @@ class UpdateCommand extends Command
     use Concerns\RunsCommands;
 
     protected $input;
+
     protected $output;
 
     /**

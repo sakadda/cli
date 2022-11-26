@@ -19,22 +19,37 @@ class NewCommand extends Command
     use Concerns\RunsCommands;
 
     const BASE_REPO = 'sakadda/sakadda';
+
     const OUTPOST_ENDPOINT = 'https://outpost.sakadda.com/v3/starter-kits/';
+
     const GITHUB_LATEST_RELEASE_ENDPOINT = 'https://api.github.com/repos/sakadda/cli/releases/latest';
 
     public $input;
+
     public $output;
+
     public $relativePath;
+
     public $absolutePath;
+
     public $name;
+
     public $version;
+
     public $starterKit;
+
     public $starterKitLicense;
+
     public $local;
+
     public $withConfig;
+
     public $withoutDependencies;
+
     public $force;
+
     public $baseInstallSuccessful;
+
     public $shouldUpdateCliToVersion = false;
 
     /**

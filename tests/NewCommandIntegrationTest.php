@@ -11,6 +11,7 @@ use Symfony\Component\Console\Tester\CommandTester;
 class NewCommandIntegrationTest extends TestCase
 {
     protected $scaffoldName;
+
     protected $scaffoldDirectory;
 
     public function setUp(): void

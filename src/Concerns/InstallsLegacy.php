@@ -12,8 +12,11 @@ use ZipArchive;
 class LegacyInstaller
 {
     protected $command;
+
     protected $version;
+
     protected $zipFilename;
+
     protected $progressBar;
 
     public function __construct($command)
