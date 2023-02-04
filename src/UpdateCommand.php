@@ -59,7 +59,7 @@ class UpdateCommand extends Command
         $helper = $this->getHelper('question');
 
         $options = [
-            'Update Sakadda and its dependencies [composer update sakadda/sakadda --with-dependencies]',
+            'Update Sakadda and its dependencies [composer update sakadda/sakadda --with-all-dependencies]',
             'Update all project dependencies [composer update]',
         ];
 
@@ -67,8 +67,8 @@ class UpdateCommand extends Command
 
         $selection = $helper->ask($this->input, new SymfonyStyle($this->input, $this->output), $question);
 
-        return strpos($selection, 'sakadda/sakadda --with-dependencies')
-            ? 'composer update sakadda/sakadda --with-dependencies'
+        return strpos($selection, 'sakadda/sakadda --with-all-dependencies')
+            ? 'composer update sakadda/sakadda --with-all-dependencies'
             : 'composer update';
     }
 }
