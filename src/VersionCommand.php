@@ -29,9 +29,9 @@ class VersionCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $please = new Please($output);
+        $sain = new Sain($output);
 
-        $please->run('--version');
+        $sain->run('--version');
 
         return 0;
     }

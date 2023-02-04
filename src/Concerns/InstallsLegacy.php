@@ -4,7 +4,7 @@ namespace Sakadda\Cli\Concerns;
 
 use GuzzleHttp\Client;
 use RuntimeException;
-use Sakadda\Cli\Please;
+use Sakadda\Cli\Sain;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use ZipArchive;
@@ -97,7 +97,7 @@ class LegacyInstaller
             return $this;
         }
 
-        (new Please($this->command->output))
+        (new Sain($this->command->output))
             ->cwd($this->command->absolutePath)
             ->run('make:user');
 

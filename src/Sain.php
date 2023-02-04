@@ -6,14 +6,14 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Process\Exception\RuntimeException;
 use Symfony\Component\Process\Process;
 
-class Please
+class Sain
 {
     protected $output;
 
     protected $cwd;
 
     /**
-     * Instantiate Sakadda `please` command wrapper.
+     * Instantiate Sakadda `sain` command wrapper.
      *
      * @param  OutputInterface  $output
      */
@@ -40,18 +40,18 @@ class Please
     }
 
     /**
-     * Run please command.
+     * Run sain command.
      *
      * @param  mixed  $commandParts
      * @return int
      */
     public function run(...$commandParts)
     {
-        if (! is_file($this->cwd().'/please')) {
+        if (! is_file($this->cwd().'/sain')) {
             throw new \RuntimeException('This does not appear to be a Sakadda project.');
         }
 
-        $process = (new Process(array_merge([PHP_BINARY, 'please'], $commandParts)))
+        $process = (new Process(array_merge([PHP_BINARY, 'sain'], $commandParts)))
             ->setTimeout(null);
 
         if ($this->cwd) {

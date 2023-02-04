@@ -419,7 +419,7 @@ class NewCommand extends Command
 
         if (PHP_OS_FAMILY != 'Windows') {
             $commands[] = "chmod 755 \"$this->absolutePath/artisan\"";
-            $commands[] = "chmod 755 \"$this->absolutePath/please\"";
+            $commands[] = "chmod 755 \"$this->absolutePath/sain\"";
         }
 
         $this->output->write(PHP_EOL);
@@ -476,7 +476,7 @@ class NewCommand extends Command
             $options[] = '--without-dependencies';
         }
 
-        $statusCode = (new Please($this->output))
+        $statusCode = (new Sain($this->output))
             ->cwd($this->absolutePath)
             ->run('starter-kit:install', $this->starterKit, ...$options);
 
@@ -514,7 +514,7 @@ class NewCommand extends Command
         }
 
         // Otherwise, delegate to the `make:user` command with interactivity and let core handle the finer details.
-        (new Please($this->output))
+        (new Sain($this->output))
             ->cwd($this->absolutePath)
             ->run('make:user', '--super');
 
@@ -528,7 +528,7 @@ class NewCommand extends Command
      */
     protected function makeSuperUserInWindows()
     {
-        $please = (new Please($this->output))->cwd($this->absolutePath);
+        $sain = (new Sain($this->output))->cwd($this->absolutePath);
 
         // Ask for email
         while (! isset($email) || ! $this->validateEmail($email)) {
@@ -544,7 +544,7 @@ class NewCommand extends Command
         }
 
         // Create super user and update with captured input.
-        $please->run('make:user', '--super', $email);
+        $sain->run('make:user', '--super', $email);
 
         $updateUser = '\Sakadda\Facades\User::findByEmail('.escapeshellarg($email).')'
             .'->password('.escapeshellarg($password).')'
@@ -556,7 +556,7 @@ class NewCommand extends Command
 
         $updateUser .= '->save();';
 
-        $please->run('tinker', '--execute', $updateUser);
+        $sain->run('tinker', '--execute', $updateUser);
 
         return $this;
     }
@@ -721,7 +721,7 @@ class NewCommand extends Command
         return is_file("{$this->absolutePath}/composer.json")
             && is_dir("{$this->absolutePath}/vendor")
             && is_file("{$this->absolutePath}/artisan")
-            && is_file("{$this->absolutePath}/please");
+            && is_file("{$this->absolutePath}/sain");
     }
 
     /**
