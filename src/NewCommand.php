@@ -102,7 +102,7 @@ class NewCommand extends Command
             ->showPostInstallInstructions()
             ->askToSpreadJoy();
 
-        return 0;
+        return Command::SUCCESS;
     }
 
     /**
