@@ -25,6 +25,5 @@ $app = new Symfony\Component\Console\Application('Sakadda CLI Tool', Sakadda\Cli
 $app->add(new Sakadda\Cli\NewCommand);
 $app->add(new Sakadda\Cli\UpdateCommand);
 $app->add(new Sakadda\Cli\VersionCommand);
-$app->add(new Sakadda\Cli\PackageListCommand);
 
 $app->run();

@@ -5,9 +5,12 @@ namespace Sakadda\Cli;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Sakadda\Cli\Concerns\RenderAscii;
 
 class VersionCommand extends Command
 {
+    use RenderAscii;
+
     /**
      * Configure the command options.
      *
@@ -29,6 +32,8 @@ class VersionCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $this->renderPowergridAscii();
+
         $sain = new Sain($output);
 
         $sain->run('--version');

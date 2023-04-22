@@ -13,9 +13,11 @@ use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Sakadda\Cli\Concerns\RenderAscii;
 
 class NewCommand extends Command
 {
+    use RenderAscii;
     use Concerns\RunsCommands;
 
     const BASE_REPO = 'sakadda/sakadda';
@@ -228,12 +230,7 @@ class NewCommand extends Command
      */
     protected function showSakaddaTitleArt()
     {
-        $this->output->write(PHP_EOL.'    <fg=gray>.d8888.  .d8b.  db   dD  .d8b.  d8888b. d8888b.  .d8b.  </>
-    <fg=gray>88\'  YP d8\' `8b 88 ,8P\' d8\' `8b 88  `8D 88  `8D d8\' `8b </>
-    <fg=gray>`8bo.   88ooo88 88,8P   88ooo88 88   88 88   88 88ooo88 </>
-    <fg=gray>  `Y8b. 88~~~88 88`8b   88~~~88 88   88 88   88 88~~~88 </>
-    <fg=gray>db   8D 88   88 88 `88. 88   88 88  .8D 88  .8D 88   88 </>
-    <fg=gray>`8888Y\' YP   YP YP   YD YP   YP Y8888D\' Y8888D\' YP   YP </>'.PHP_EOL.PHP_EOL);
+        $this->renderPowergridAscii();
 
         return $this;
     }
